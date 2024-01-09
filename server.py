@@ -17,7 +17,9 @@ def sent_analyzer():
                 dominant_emotion = a
 
 
-    final_response = "For the given statement, the system response is {} : {}, {} : {}, {} : {}, {} : {}, {} : {}.".format("\'anger\'", response['anger'],
+    final_response = "For the given statement, the system response is"
+
+    final_response += "{} : {}, {} : {}, {} : {}, {} : {}, {} : {}.".format("\'anger\'", response['anger'],
                                                                                       "\'disgust\'", response['disgust'],
                                                                                       "\'fear\'", response['fear'],
                                                                                       "\'joy\'", response['joy'],
