@@ -8,26 +8,31 @@ def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
 
-    dominant_emotion = ''
-    de_score = 0
-    for (a,b) in response.items():
-        if isinstance(b, float):
-            if de_score < float(b):
-                de_score = float(b)
-                dominant_emotion = a
+    #dominant_emotion = ''
+    #de_score = 0
+
+    if response['dominant_emotion'] is None:
+        return "INvalid input ! Try again"
+    else:
+
+        for (a,b) in response.items():
+            if isinstance(b, float):
+                if de_score < float(b):
+                    de_score = float(b)
+                    dominant_emotion = a
 
 
-    final_response = "For the given statement, the system response is"
+        final_response = "For the given statement, the system response is"
 
-    final_response += "{} : {}, {} : {}, {} : {}, {} : {}, {} : {}.".format("\'anger\'", response['anger'],
-                                                                                      "\'disgust\'", response['disgust'],
-                                                                                      "\'fear\'", response['fear'],
-                                                                                      "\'joy\'", response['joy'],
-                                                                                      "\'sadness\'", response['sadness'],
-                                                                                      )
-    final_response += f"\n The dominant emotion is {dominant_emotion}"
+        final_response += "{} : {}, {} : {}, {} : {}, {} : {}, {} : {}.".format("\'anger\'", response['anger'],
+                                                                                        "\'disgust\'", response['disgust'],
+                                                                                        "\'fear\'", response['fear'],
+                                                                                        "\'joy\'", response['joy'],
+                                                                                        "\'sadness\'", response['sadness'],
+                                                                                        )
+        final_response += f"\n The dominant emotion is {response['dominant_emotion']}"
 
-    return final_response
+        return final_response
 
 
 
