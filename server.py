@@ -6,10 +6,27 @@ app = Flask("Emotion Detector")
 @app.route("/emotionDetector")
 def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
-    response = sentiment_analyzer(text_to_analyze)
-    label = response['label']
-    score = response['score']
-    return "The given text has been identified as {} with a score of {}.".format(label.split('_')[1], score)
+    response = emotion_detector(text_to_analyze)
+
+    dominant_emotion = ''
+    de_score = 0
+    for (a,b) in response.items():
+        if isinstance(b, float):
+            if de_score < float(b):
+                de_score = float(b)
+                dominant_emotion = a
+
+
+    final_response = "For the given statement, the system response is {} : {}, {} : {}, {} : {}, {} : {}, {} : {}.".format("\'anger\'", response['anger'],
+                                                                                      "\'disgust\'", response['disgust'],
+                                                                                      "\'fear\'", response['fear'],
+                                                                                      "\'joy\'", response['joy'],
+                                                                                      "\'sadness\'", response['sadness'],
+                                                                                      )
+    final_response += f"\n The dominant emotion is {dominant_emotion}"
+
+    return final_response
+
 
 
 @app.route("/")
