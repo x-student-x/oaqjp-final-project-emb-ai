@@ -10,7 +10,7 @@ def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
 
-    #dominant_emotion = ''
+
     de_score = 0
 
     if response is None:
@@ -20,7 +20,7 @@ def sent_analyzer():
         if isinstance(b, float):
             if de_score < float(b):
                 de_score = float(b)
-                #dominant_emotion = a
+
 
 
         final_response = "For the given statement, the system response is "
@@ -31,9 +31,7 @@ def sent_analyzer():
 
         final_response += f"\n The dominant emotion is {response['dominant_emotion']}"
 
-        return final_response #+ data_response + end_response
-
-
+        return final_response
 
 @app.route("/")
 def render_index_page():

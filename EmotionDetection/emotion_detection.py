@@ -8,7 +8,7 @@ def emotion_detector(text_to_analyse):
     response = requests.post(url, json = myobj, headers=header)
     formatted_response = json.loads(response.text)
 
-    #emotions_scores = formatted_response['emotionPredictions'][0]['emotion']
+
     dominant_emotion = None
     de_score = 0
 
@@ -22,17 +22,3 @@ def emotion_detector(text_to_analyse):
         return emotions_scores
     elif response.status_code == 500:
         return dominant_emotion
-
-    #emotions_scores = formatted_response['emotionPredictions'][0]['emotion']
-
-    #dominant_emotion = ''
-    #de_score = 0
-
-    #for (a,b) in emotions_scores.items():
-    #    if de_score < b:
-    #        de_score = b
-    #        dominant_emotion = a
-
-
-
-    #return {item:item1 for item,item1 in emotions_scores.items()}
